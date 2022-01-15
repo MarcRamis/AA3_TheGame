@@ -36,6 +36,7 @@ namespace OctopusController
     {
         //TAIL
         Transform tailTarget;
+        Transform tempTailTarget;
         Transform tailEndEffector;
         MyTentacleController _tail;
         float animationRange = 7f;
@@ -132,6 +133,7 @@ namespace OctopusController
         public void NotifyTailTarget(Transform target)
         {
             tailTarget = target;
+            tempTailTarget = target;
         }
 
         //TODO: Notifies the start of the walking animation
@@ -148,6 +150,14 @@ namespace OctopusController
             updateLegs();
             if (Vector3.Distance(tailTarget.position, _tail.Bones[_tail.Bones.Length - 1].position) < animationRange)
             {
+                if(tailTarget.position.x > -124.0f) //Left
+                {
+                    //float offset = (tailTarget.position.x + 124.0f) * ;
+                }
+                else //Right
+                {
+
+                }
                 updateTail();
             }
         }

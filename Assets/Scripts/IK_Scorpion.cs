@@ -9,6 +9,8 @@ public class IK_Scorpion : MonoBehaviour
 
     public IK_tentacles _myOctopus;
 
+    public Controller myController;
+
     [Header("Body")]
     float animTime;
     public float animDuration = 5;
@@ -42,12 +44,12 @@ public class IK_Scorpion : MonoBehaviour
 
         NotifyTailTarget();
         
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            NotifyStartWalk();
-            animTime = 0;
-            animPlaying = true;
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    NotifyStartWalk();
+        //    animTime = 0;
+        //    animPlaying = true;
+        //}
 
         if (animTime < animDuration)
         {
@@ -61,7 +63,17 @@ public class IK_Scorpion : MonoBehaviour
 
         _myController.UpdateIK();
     }
-    
+    public void StartWalk()
+    {
+        NotifyStartWalk();
+        animTime = 0;
+        animPlaying = true;
+    }
+    public void ResetScorpion()
+    {
+        animTime = 0;
+        animPlaying = false;
+    }
     //Function to send the tail target transform to the dll
     public void NotifyTailTarget()
     {

@@ -7,6 +7,8 @@ public class MovingBall : MonoBehaviour
     [SerializeField]
     IK_tentacles _myOctopus;
 
+    [SerializeField] private Controller mySceneController;
+
     //movement speed in units per second
     [Range(-1.0f, 1.0f)]
     [SerializeField]
@@ -37,6 +39,7 @@ public class MovingBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        mySceneController.SetStartForce();
         _myOctopus.NotifyShoot();
     }
 }
