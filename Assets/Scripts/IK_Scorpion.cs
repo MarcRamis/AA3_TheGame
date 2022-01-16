@@ -28,6 +28,8 @@ public class IK_Scorpion : MonoBehaviour
     public Transform[] legTargets;
     public Transform[] futureLegBases;
 
+    [SerializeField] private Vector3 curveOffSet = new Vector3(Mathf.Cos(5), 0, 0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,7 @@ public class IK_Scorpion : MonoBehaviour
         if (animTime < animDuration)
         {
             Body.position = Vector3.Lerp(StartPos.position, EndPos.position, animTime / animDuration);
+            //Body.position += new Vector3(Mathf.Cos(animTime), 0, 0);
         }
         else if (animTime >= animDuration && animPlaying)
         {
