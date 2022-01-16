@@ -56,7 +56,7 @@ public class IK_Scorpion : MonoBehaviour
         if (animTime < animDuration)
         {
             Body.position = Vector3.Lerp(StartPos.position, EndPos.position, animTime / animDuration);
-            Body.position += new Vector3(Mathf.Cos(animTime), 0, 0);
+            //Body.position += new Vector3(Mathf.Cos(animTime), 0, 0);
         }
         else if (animTime >= animDuration && animPlaying)
         {
