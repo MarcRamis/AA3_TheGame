@@ -39,7 +39,11 @@ public class MovingBall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        mySceneController.SetStartForce();
-        _myOctopus.NotifyShoot();
+        if(collision.transform.root.gameObject.tag == "Player")
+        {
+            mySceneController.SetStartForce();
+            _myOctopus.NotifyShoot();
+        }
+        
     }
 }
