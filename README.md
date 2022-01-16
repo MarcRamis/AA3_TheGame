@@ -13,3 +13,11 @@ Emails in the same order:
 Pictures in the same order: 
   - https://enti.classlife.education/user/friends/alex-alcaide-arroyes-1-1496 
   - https://enti.classlife.education/user/friends/marc-ramis-caldes-1-1497
+  
+  
+Formula of the instantaneuos position
+
+We use Euler Solver 
+x=xº+vt;
+v=vº+at;
+a = gravity + direction ball force;

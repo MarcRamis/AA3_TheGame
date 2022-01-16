@@ -14,6 +14,7 @@ public class IK_tentacles : MonoBehaviour
     [SerializeField]
     Transform[] _randomTargets;
 
+    [SerializeField] private GameObject[] randomTargetObj = new GameObject[4];
 
     MyOctopusController _myController = new MyOctopusController();
     
@@ -91,4 +92,16 @@ public class IK_tentacles : MonoBehaviour
         }
 
     }
+
+    public void ResetTargetTentacles()
+    {
+        _myController.ResetBallHit();
+
+        for(int i = 0; i < _randomTargets.Length; i++)
+        {
+            _randomTargets[i] = randomTargetObj[i].transform;
+        }
+        //_myController.ResetTentacles(_randomTargets);
+    }
+
 }

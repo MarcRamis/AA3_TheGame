@@ -106,3 +106,10 @@ D:\Uni Projects\Animacion y Modelado\AA3_TheGame\Solution\OctopusController\obj\
 D:\Uni Projects\Animacion y Modelado\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.csproj.CopyComplete
 D:\Uni Projects\Animacion y Modelado\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.dll
 D:\Uni Projects\Animacion y Modelado\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.pdb
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\bin\Debug\OctopusController.dll
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\bin\Debug\OctopusController.pdb
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.csproj.AssemblyReference.cache
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.csproj.CoreCompileInputs.cache
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.csproj.CopyComplete
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.dll
+C:\Users\alex\Documents\Universidad\GitKraken\AA3_TheGame\Solution\OctopusController\obj\Debug\OctopusController.pdb

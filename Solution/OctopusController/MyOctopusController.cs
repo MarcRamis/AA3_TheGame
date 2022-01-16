@@ -27,6 +27,8 @@ namespace OctopusController
 
         bool isBallHit = false;
 
+        int shootCount = 0;
+
         #region public methods
         //DO NOT CHANGE THE PUBLIC METHODS!!
 
@@ -57,7 +59,7 @@ namespace OctopusController
             }
 
             _currentTarget = randomTargets;
-            //_currentTarget = _randomTargets;
+            _randomTargets = _currentTarget;
             //TODO: use the regions however you need to make sure each tentacle stays in its region
             _theta = new float[_tentacles[0].Bones.Length];
         }
@@ -73,8 +75,21 @@ namespace OctopusController
             //TODO. what happens here?
             Debug.Log("Shoot");
             isBallHit = true;
+            shootCount++;
         }
 
+        public void ResetBallHit()
+        {
+            isBallHit = false;
+        }
+
+        public void ResetTentacles(Transform[] tentacleRoots)
+        {
+            for(int i = 0; i < _currentTarget.Length; i++)
+            {
+                _currentTarget[i] = tentacleRoots[i];
+            }
+        }
 
         public void UpdateTentacles()
         {
@@ -146,25 +161,30 @@ namespace OctopusController
 
         void SetTentacleTarget()
         {
-            if (isBallHit)
+
+            if(shootCount % 2 == 0)
             {
-                if (_currentRegion.localPosition.z == -15f)
+                if (isBallHit)
                 {
-                    _currentTarget[0] = _target;
-                }
-                else if (_currentRegion.localPosition.z == -5f)
-                {
-                    _currentTarget[1] = _target;
-                }
-                else if (_currentRegion.localPosition.z == 5f)
-                {
-                    _currentTarget[2] = _target;
-                }
-                else if(_currentRegion.localPosition.z == 15f) 
-                {
-                    _currentTarget[3] = _target;
+                    if (_currentRegion.localPosition.z == -15f)
+                    {
+                        _currentTarget[0] = _target;
+                    }
+                    else if (_currentRegion.localPosition.z == -5f)
+                    {
+                        _currentTarget[1] = _target;
+                    }
+                    else if (_currentRegion.localPosition.z == 5f)
+                    {
+                        _currentTarget[2] = _target;
+                    }
+                    else if (_currentRegion.localPosition.z == 15f)
+                    {
+                        _currentTarget[3] = _target;
+                    }
                 }
             }
+
         }
 
         #endregion
