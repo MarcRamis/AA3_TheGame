@@ -46,4 +46,13 @@ public class MovingBall : MonoBehaviour
         }
         
     }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.transform.root.gameObject.tag == "Player")
+        {
+            mySceneController.ResetForce();
+        }
+    }
+
 }

@@ -51,22 +51,12 @@ public class ScorpionWalk_Controller : MonoBehaviour
         RaycastHit hit;
         foreach (Transform legFuturePos in futureLegs)
         {
-            //if (Physics.Raycast(legFuturePos.position + new Vector3(0, offsetRaycastHeight, 0), Vector3.up, out hit, distanceRayCast))
-            //{
-            //    Debug.Log("Up: " + hit.point);
-            //    Debug.Log(hit.transform.gameObject.name);
-            //    legFuturePos.position = hit.point;
-            //}
             if (Physics.Raycast(legFuturePos.position + new Vector3(0, offsetRaycastHeight, 0), Vector3.down, out hit, distanceRayCast))
             {
-                Debug.Log("Down: " + hit.point);
-                Debug.Log(hit.transform.gameObject.name);
                 legFuturePos.position = hit.point;
 
             }
         }
-
-        //CalculateLegDistanceWithFutpos();
 
         RaycastHit hitWithCurrentLegs;
         for (int i = 0; i < currentLegsPos.Length; i++)
