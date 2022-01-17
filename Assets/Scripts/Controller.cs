@@ -27,6 +27,8 @@ public class Controller : MonoBehaviour
 
     [SerializeField] IK_tentacles octopusScript = null;
 
+    [SerializeField] ScorpionWalk_Controller scorpionWalContr = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -103,6 +105,7 @@ public class Controller : MonoBehaviour
     public void Reset()
     {
         scorpionScript.ResetScorpion();
+        scorpionWalContr.ResetLegsStartPos();
 
         ball.transform.position = initialPos;
         ballTarget.transform.position = initialBallTargetPos;

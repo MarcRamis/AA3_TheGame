@@ -56,11 +56,16 @@ namespace OctopusController
         Transform[] legFutureBases;
         MyTentacleController[] _legs = new MyTentacleController[6];
         Transform[] auxFutureBases = new Transform[6];
+        Vector3[] auxFutureBasesPos = new Vector3[6];
+
+        private float[] legsTimer = new float[6];
+        private float legsTimeToArriveDuration = 0.8f;
 
         private Vector3[,] copy;
         private float[,] distances;
 
         private bool[] legArrived = new bool[6];
+        private bool[] legIsGoingDown = new bool[6];
 
         #region public
         public void InitLegs(Transform[] LegRoots,Transform[] LegFutureBases, Transform[] LegTargets)
@@ -83,6 +88,10 @@ namespace OctopusController
                 {
                     distances[i,j] = Vector3.Distance(_legs[i].Bones[j].transform.position, _legs[i].Bones[j + 1].transform.position);
                 }
+            }
+            for(int i = 0; i < legsTimer.Length; i++)
+            {
+                legsTimer[i] = 0.0f;
             }
         }
 
@@ -174,15 +183,25 @@ namespace OctopusController
                 if(Vector3.Distance(_legs[i].Bones[0].position, legFutureBases[i].position) > 0.8f && !legArrived[i])
                 {
                     legArrived[i] = true;
-                    auxFutureBases[i] = legFutureBases[i];     
+                    //auxFutureBases[i] = legFutureBases[i];
+                    auxFutureBasesPos[i] = new Vector3(legFutureBases[i].position.x, legFutureBases[i].position.y + 0.8f, legFutureBases[i].position.z);
+                    legsTimer[i] = 0.0f;
                 }
                 if (legArrived[i])
                 {
-                    _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBases[i].position, 55f * Time.deltaTime);
+                    legsTimer[i] += Time.deltaTime;
+                    _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPos[i], legsTimer[i] / legsTimeToArriveDuration);
 
-                    if (Vector3.Distance(_legs[i].Bones[0].position, auxFutureBases[i].position) < 0.1f)
+                    if (Vector3.Distance(_legs[i].Bones[0].position, auxFutureBasesPos[i]) < 0.1f)
                     {
                         legArrived[i] = false;
+                        legIsGoingDown[i] = false;
+                        legsTimer[i] = 0.0f;
+                    }
+                    else if(Vector3.Distance(_legs[i].Bones[0].position, legFutureBases[i].position) <= 0.4f && !legIsGoingDown[i])
+                    {
+                        auxFutureBasesPos[i] = legFutureBases[i].position;
+                        legIsGoingDown[i] = true;
                     }
                 }
             }
