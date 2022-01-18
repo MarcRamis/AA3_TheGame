@@ -13,7 +13,7 @@ public class IK_Scorpion : MonoBehaviour
 
     [Header("Body")]
     float animTime;
-    public float animDuration = 5;
+    public float animDuration = 50;
     bool animPlaying = false;
     public Transform Body;
     public Transform StartPos;
@@ -53,13 +53,13 @@ public class IK_Scorpion : MonoBehaviour
         //    animPlaying = true;
         //}
 
-        if (animTime < animDuration * Mathf.PI)
+        if (animTime < animDuration)
         {
-            //Body.position = Vector3.Lerp(StartPos.position, EndPos.position, animTime / animDuration);
-            Body.position = Vector3.Lerp(StartPos.position, new Vector3(Mathf.Sin(animTime) * 1f + EndPos.position.x, EndPos.position.y, EndPos.position.z), animTime / (animDuration * Mathf.PI));
+            Body.position = Vector3.Lerp(StartPos.position, EndPos.position, animTime / animDuration);
+            //Body.position = Vector3.Lerp(StartPos.position, new Vector3(Mathf.Sin(animTime) * 1f + EndPos.position.x, EndPos.position.y, EndPos.position.z), animTime / (animDuration * Mathf.PI));
             //Body.position += new Vector3(Mathf.Cos(animTime), 0, 0);
         }
-        else if (animTime >= animDuration * Mathf.PI && animPlaying)
+        else if (animTime >= animDuration && animPlaying)
         {
             Body.position = EndPos.position;
             animPlaying = false;

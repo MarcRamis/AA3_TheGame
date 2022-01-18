@@ -7,6 +7,7 @@ public class ScorpionWalk_Controller : MonoBehaviour
     [SerializeField] Transform[] futureLegs = new Transform[6];
 
     [SerializeField] Transform[] currentLegsPos = new Transform[6];
+    [SerializeField] Transform[] jointLegs02 = new Transform[6];
     float[] legsStartPos = new float[6];
     float[] legDifference = new float[6];
     [Range(0.0f, 2.0f)]
@@ -119,6 +120,8 @@ public class ScorpionWalk_Controller : MonoBehaviour
         this.gameObject.transform.GetChild(0).GetChild(0).position = new Vector3(this.gameObject.transform.GetChild(0).GetChild(0).position.x, (startHeight + (allLegsDifference / 6) * percentToGoUpMultiplayer), this.gameObject.transform.GetChild(0).GetChild(0).position.z);
         this.gameObject.transform.GetChild(0).GetChild(1).position = new Vector3(this.gameObject.transform.GetChild(0).GetChild(1).position.x, (startHeight + (allLegsDifference / 6) * percentToGoUpMultiplayer), this.gameObject.transform.GetChild(0).GetChild(1).position.z);
         this.gameObject.transform.GetChild(0).GetChild(3).position = new Vector3(this.gameObject.transform.GetChild(0).GetChild(3).position.x, (startHeight + (allLegsDifference / 6) * percentToGoUpMultiplayer), this.gameObject.transform.GetChild(0).GetChild(3).position.z);
+
+        
     }
 
     private void CalculateLegDistanceWithFutpos()

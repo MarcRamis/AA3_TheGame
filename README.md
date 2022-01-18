@@ -21,3 +21,9 @@ We use Euler Solver
 x=xº+vt;
 v=vº+at;
 a = gravity + direction ball force;
+
+Formula to make the animation of the legs
+
+We calculate the distance between the leg and the future leg. If the distance is bigger than the offset (0.8f), we make a Lerp of the leg to the future leg + an offset in Y to make it higher. Then if the distance is the half of the offset (0.8f) we change the last future leg (future leg + an offset) to his original position without the offset in Y.
+The code can be found in the DLL MyScorpionController in line 178.
+
