@@ -2884,7 +2884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityStrenghtBar: 1
-  velocityEffectBar: 5
+  velocityEffectBar: 0.01
   forceSlider: {fileID: 1725396510}
   effectSlider: {fileID: 1172727220}
   ball: {fileID: 1938829479}
@@ -2926,6 +2926,7 @@ MonoBehaviour:
   cilinderRadius: 0.008
   density: 1.2
   effectDirection: {x: 1, y: 1, z: 0}
+  doOnce: 0
 --- !u!1 &635854159 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 865907604773395664, guid: c9ae8800298c5904a805978e2ff06201,
@@ -3418,7 +3419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718832878}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -121.64, y: 18.36, z: -32.414}
+  m_LocalPosition: {x: -122.17, y: 18.36, z: -32.414}
   m_LocalScale: {x: 2.9794111, y: 2.9794111, z: 2.9794111}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5688,7 +5689,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1652727225}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 700
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -7320,7 +7321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1705726685}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -121.71, y: 19.111, z: -33.41}
+  m_LocalPosition: {x: -122.37, y: 19.111, z: -33.41}
   m_LocalScale: {x: 1.7559, y: 1.7559, z: 1.7559}
   m_Children: []
   m_Father: {fileID: 0}
@@ -7804,7 +7805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811920280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -121.64, y: 18.36, z: -34.351}
+  m_LocalPosition: {x: -122.54, y: 18.36, z: -34.351}
   m_LocalScale: {x: 2.9794111, y: 2.9794111, z: 2.9794111}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8695,7 +8696,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073025048}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -124.723, y: 18.36, z: -32.89}
+  m_LocalPosition: {x: -125.59, y: 18.36, z: -32.89}
   m_LocalScale: {x: 2.9794111, y: 2.9794111, z: 2.9794111}
   m_Children: []
   m_Father: {fileID: 0}

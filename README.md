@@ -22,6 +22,11 @@ x=xº+vt;
 v=vº+at;
 a = gravity + direction ball force;
 
+Formula used to calculate the forces
+
+We sum all the forces to later apply them in Euler. We sum the start force, the gravity and the magnus effect, that is calculed by F = (w x v) and later that force we multiplied it with a value of the slider Effect Strenght between 0 and 1.
+
+
 Formula to make the animation of the legs
 
 We calculate the distance between the leg and the future leg. If the distance is bigger than the offset (0.8f), we make a Lerp of the leg to the future leg + an offset in Y to make it higher. Then if the distance is the half of the offset (0.8f) we change the last future leg (future leg + an offset) to his original position without the offset in Y.

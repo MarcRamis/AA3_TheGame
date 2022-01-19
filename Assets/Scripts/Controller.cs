@@ -76,7 +76,8 @@ public class Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
-        magnusForce = magnusEffect.MagnusForce(ballVelocity);
+        //magnusForce = magnusEffect.MagnusForce(ballVelocity);
+        magnusForce = magnusEffect.MagnusForceWithVelocity(ballVelocity, 0.0017f) * effectSlider.value;
         SolverEuler(ballAcceleration + gravity + magnusForce);
     }
 
@@ -139,11 +140,11 @@ public class Controller : MonoBehaviour
     {
         if (effectSlider.value < effectSlider.maxValue && Input.GetKey(KeyCode.X))
         {
-            effectSlider.value += velocityStrenghtBar;
+            effectSlider.value += velocityEffectBar;
         }  
         else if (forceSlider.value >= 0 && Input.GetKey(KeyCode.Z))
         {
-            effectSlider.value -= velocityStrenghtBar;
+            effectSlider.value -= velocityEffectBar;
         }
     }
     public void SetStartForce()
@@ -158,7 +159,7 @@ public class Controller : MonoBehaviour
 
     public void ResetForce()
     {
-        ballAcceleration = Vector3.zero;
+        //ballAcceleration = Vector3.zero;
     }
 
     private void SolverEuler(Vector3 _force)
@@ -198,5 +199,7 @@ public class Controller : MonoBehaviour
 
         setInitialVelocityArrow = false;
         ballScript.ResetArrows();
+
+        magnusEffect.doOnce = false;
     }
 }
