@@ -56,10 +56,11 @@ namespace OctopusController
         Transform[] legFutureBases;
         MyTentacleController[] _legs = new MyTentacleController[6];
         Transform[] auxFutureBases = new Transform[6];
-        Vector3[] auxFutureBasesPos = new Vector3[6];
+        Vector3[] auxFutureBasesPosUp = new Vector3[6];
+        Vector3[] auxFutureBasesPosDown = new Vector3[6];
 
         private float[] legsTimer = new float[6];
-        private float legsTimeToArriveDuration = 1.5f;
+        private float legsTimeToArriveDuration = 0.4f;
 
         private Vector3[,] copy;
         private float[,] distances;
@@ -181,29 +182,34 @@ namespace OctopusController
             //check for the distance to the futureBase, then if it's too far away start moving the leg towards the future base position
             for (int i = 0; i < _legs.Length; i++)
             {
-                Debug.Log((Vector3.Magnitude(new Vector3(0, 0, _legs[i].Bones[0].position.z) - new Vector3(0, 0, legFutureBases[i].position.z))));
                 if(Vector3.Magnitude(new Vector3(0, 0, _legs[i].Bones[0].position.z) - new Vector3(0, 0, legFutureBases[i].position.z)) > 0.8f && !legArrived[i])
                 {
                     legArrived[i] = true;
                     //auxFutureBases[i] = legFutureBases[i];
-                    auxFutureBasesPos[i] = new Vector3(legFutureBases[i].position.x, legFutureBases[i].position.y + 0.2f, legFutureBases[i].position.z);
+                    auxFutureBasesPosUp[i] = new Vector3(legFutureBases[i].position.x, legFutureBases[i].position.y + 0.2f, legFutureBases[i].position.z + 0.4f);
+                    auxFutureBasesPosDown[i] = new Vector3(legFutureBases[i].position.x, legFutureBases[i].position.y, legFutureBases[i].position.z);
                     legsTimer[i] = 0.0f;
                 }
                 if (legArrived[i])
                 {
                     legsTimer[i] += Time.deltaTime;
-                    _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPos[i], legsTimer[i] / legsTimeToArriveDuration);
+                    //_legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPos[i], legsTimer[i] / legsTimeToArriveDuration);
 
                     if (legsTimer[i] >= legsTimeToArriveDuration)
                     {
                         legArrived[i] = false;
                         legIsGoingDown[i] = false;
                         legsTimer[i] = 0.0f;
+                        Debug.Log("Stop");
                     }
-                    else if(legsTimer[i] >= legsTimeToArriveDuration / 2.5f && !legIsGoingDown[i])
+                    else if(legsTimer[i] > legsTimeToArriveDuration / 2.0f)
                     {
-                        auxFutureBasesPos[i] = legFutureBases[i].position;
-                        legIsGoingDown[i] = true;
+                        Debug.Log("Go down");
+                        _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPosDown[i], (legsTimer[i] - (legsTimeToArriveDuration / 2.0f)) / (legsTimeToArriveDuration / 2.0f));
+                    }
+                    else
+                    {
+                        _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPosUp[i], legsTimer[i] / (legsTimeToArriveDuration / 2.0f));
                     }
                 }
                 if(legsTimer[i] <= 0.0f)
