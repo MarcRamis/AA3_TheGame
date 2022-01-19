@@ -54,19 +54,21 @@ namespace OctopusController
         //LEGS
         Transform[] legTargets;
         Transform[] legFutureBases;
+        Vector3[] initlegTargetsPos = new Vector3[6];
         MyTentacleController[] _legs = new MyTentacleController[6];
         Transform[] auxFutureBases = new Transform[6];
         Vector3[] auxFutureBasesPosUp = new Vector3[6];
         Vector3[] auxFutureBasesPosDown = new Vector3[6];
 
         private float[] legsTimer = new float[6];
-        private float legsTimeToArriveDuration = 0.4f;
+        private float legsTimeToArriveDuration = 0.1f;
 
         private Vector3[,] copy;
         private float[,] distances;
 
         private bool[] legArrived = new bool[6];
         private bool[] legIsGoingDown = new bool[6];
+        private bool[] changeInitLegPos = new bool[6];
 
         #region public
         public void InitLegs(Transform[] LegRoots,Transform[] LegFutureBases, Transform[] LegTargets)
@@ -189,6 +191,7 @@ namespace OctopusController
                     auxFutureBasesPosUp[i] = new Vector3(legFutureBases[i].position.x, legFutureBases[i].position.y + 0.2f, legFutureBases[i].position.z + 0.4f);
                     auxFutureBasesPosDown[i] = new Vector3(legFutureBases[i].position.x, legFutureBases[i].position.y, legFutureBases[i].position.z);
                     legsTimer[i] = 0.0f;
+                    initlegTargetsPos[i] = _legs[i].Bones[0].position;
                 }
                 if (legArrived[i])
                 {
@@ -200,26 +203,32 @@ namespace OctopusController
                         legArrived[i] = false;
                         legIsGoingDown[i] = false;
                         legsTimer[i] = 0.0f;
+                        changeInitLegPos[i] = false;
                         Debug.Log("Stop");
                     }
                     else if(legsTimer[i] > legsTimeToArriveDuration / 2.0f)
                     {
+                        if(!changeInitLegPos[i])
+                        {
+                            initlegTargetsPos[i] = _legs[i].Bones[0].position;
+                            changeInitLegPos[i] = true;
+                        }
                         Debug.Log("Go down");
-                        _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPosDown[i], (legsTimer[i] - (legsTimeToArriveDuration / 2.0f)) / (legsTimeToArriveDuration / 2.0f));
+                        _legs[i].Bones[0].position = Vector3.Lerp(initlegTargetsPos[i], auxFutureBasesPosDown[i], (legsTimer[i] - (legsTimeToArriveDuration / 2.0f)) / (legsTimeToArriveDuration / 2.0f));
                     }
                     else
                     {
-                        _legs[i].Bones[0].position = Vector3.Lerp(_legs[i].Bones[0].position, auxFutureBasesPosUp[i], legsTimer[i] / (legsTimeToArriveDuration / 2.0f));
+                        _legs[i].Bones[0].position = Vector3.Lerp(initlegTargetsPos[i], auxFutureBasesPosUp[i], legsTimer[i] / (legsTimeToArriveDuration / 2.0f));
                     }
                 }
-                if(legsTimer[i] <= 0.0f)
+                if (legsTimer[i] <= 0.0f)
                 {
-                    if (Physics.Raycast(legFutureBases[i].position + new Vector3(0, 1, 0), Vector3.down, out hitWithCurrentLegs, 50))
+                    if (Physics.Raycast(_legs[i].Bones[0].position + new Vector3(0, 1, 0), Vector3.down, out hitWithCurrentLegs, 50))
                     {
                         _legs[i].Bones[0].position = new Vector3(_legs[i].Bones[0].position.x, hitWithCurrentLegs.point.y, _legs[i].Bones[0].position.z);
 
                     }
-                    
+
                 }
             }
         }
