@@ -36,13 +36,16 @@ public class IK_tentacles : MonoBehaviour
     [SerializeField]
     bool _updateTwistSwingLimits = false;
 
-
+    [HideInInspector] public int myShootCount;
 
 
     [SerializeField]
     float TwistMin{set{ _myController.TwistMin = value; }}
 
-
+    [SerializeField] public Animation robot1Animation;
+    [SerializeField] public Animation robot2Animation;
+    [SerializeField] public Animation robot3Animation;
+    [SerializeField] public Animation robot4Animation;
 
     #region public methods
 
@@ -56,6 +59,32 @@ public class IK_tentacles : MonoBehaviour
     public void NotifyShoot()
     {
         _myController.NotifyShoot();
+        myShootCount++;
+
+        if (myShootCount % 2 == 0)
+        {
+            robot1Animation.Play("Disbelief");
+            robot2Animation.Play("Disbelief");
+            robot3Animation.Play("Victory");
+            robot4Animation.Play("Victory");
+
+            //robot1Animation.PlayQueued("Talking");
+            //robot2Animation.PlayQueued("Talking");
+            //robot3Animation.PlayQueued("Talking");
+            //robot4Animation.PlayQueued("Talking");
+        }
+        else
+        {
+            robot1Animation.Play("Victory");
+            robot2Animation.Play("Victory");
+            robot3Animation.Play("Disbelief");
+            robot4Animation.Play("Disbelief");
+
+            //robot1Animation.PlayQueued("Talking");
+            //robot2Animation.PlayQueued("Talking");
+            //robot3Animation.PlayQueued("Talking");
+            //robot4Animation.PlayQueued("Talking");
+        }
     }
 
 
@@ -91,6 +120,10 @@ public class IK_tentacles : MonoBehaviour
             _updateTwistSwingLimits = false;
         }
 
+        robot1Animation.PlayQueued("Talking", QueueMode.CompleteOthers);
+        robot2Animation.PlayQueued("Talking", QueueMode.CompleteOthers);
+        robot3Animation.PlayQueued("Talking", QueueMode.CompleteOthers);
+        robot4Animation.PlayQueued("Talking", QueueMode.CompleteOthers);
     }
 
     public void ResetTargetTentacles()
