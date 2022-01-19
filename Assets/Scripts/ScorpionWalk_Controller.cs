@@ -58,16 +58,16 @@ public class ScorpionWalk_Controller : MonoBehaviour
 
             }
         }
+        //CalculateLegDistanceWithFutpos();
+        //RaycastHit hitWithCurrentLegs;
+        //for (int i = 0; i < currentLegsPos.Length; i++)
+        //{
+        //    if (Physics.Raycast(currentLegsPos[i].position + new Vector3(0, offsetRaycastHeight, 0), Vector3.down, out hitWithCurrentLegs, distanceRayCast) && isLegInFloor[i])
+        //    {
+        //        currentLegsPos[i].position = new Vector3(currentLegsPos[i].position.x, hitWithCurrentLegs.point.y, currentLegsPos[i].position.z);
 
-        RaycastHit hitWithCurrentLegs;
-        for (int i = 0; i < currentLegsPos.Length; i++)
-        {
-            if (Physics.Raycast(currentLegsPos[i].position + new Vector3(0, offsetRaycastHeight, 0), Vector3.down, out hitWithCurrentLegs, distanceRayCast) && isLegInFloor[i])
-            {
-                currentLegsPos[i].position = new Vector3(currentLegsPos[i].position.x, hitWithCurrentLegs.point.y, currentLegsPos[i].position.z);
-
-            }
-        }
+        //    }
+        //}
 
         RotateScorpionBody();
         MoveScorpionBody();
