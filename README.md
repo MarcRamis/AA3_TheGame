@@ -16,6 +16,22 @@ Pictures in the same order:
   
 To start the game press space, this will make the force slider move. When you release space the scorpion will start moving. Change the effect slider with z and x. After shooting the ball, you can reset the scorpion with the button in the canvas "Reset Position". In game you can see the ball arrow of where is going without the effect before shooting the ball and after shooting you will be able to see the arrows of initial velocity, velocity and force. You can also turn Off/On the arrows with I.
 
+Exercise 1
+It can be found in the gameObject controller in the script controller.
+The direction of the target is controlled by the gameObject BlueTarget inside the Blue_Team gameObject.
+To reset the scorpion, controller calls a function inside the script ScorpionWalk_Controller that is inside the gameObject Scorpion.
+
+Exercise 2
+The Magnus Effect formula can be found inside the gameObject controller in the script Magnus Effect.
+The small red sphere to show where the tall will hit is controlled by the script MovingBall inside the gameObject Ball.
+To toggle the arrows the input is inside the script Controller and the code is in the gameObject Ball inside the script MovingBall.
+
+Exercise 3
+The code to move the legs is in the DLL MyScorpionController in line 178.
+The raysCast of the future legs is made inside the script ScorpionWalk_Controller that is inside the gameObject Scorpion. Also here is aplayed the rotation and height of the scropion depending of the legs position.
+
+Exercise 4
+
 
 Formula of the instantaneuos position
 

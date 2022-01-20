@@ -1406,7 +1406,7 @@ MonoBehaviour:
   distanceFromLegPosFutPos: 0.8
   distanceRayCast: 50
   offsetRaycastHeight: 1
-  rotationMultiplayer: 8
+  rotationMultiplayer: 6
   percentToGoUpMultiplayer: 1
 --- !u!4 &289669215 stripped
 Transform:
