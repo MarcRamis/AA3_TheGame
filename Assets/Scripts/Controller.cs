@@ -33,6 +33,8 @@ public class Controller : MonoBehaviour
     [SerializeField] private GameObject ballTarget = null;
     private Vector3 initialBallTargetPos = new Vector3(0, 0, 0);
 
+    //Scripts
+    [Header("Scripts")]
     [SerializeField] IK_Scorpion scorpionScript = null;
 
     [SerializeField] IK_tentacles octopusScript = null;
@@ -41,7 +43,13 @@ public class Controller : MonoBehaviour
 
     [SerializeField] MagnusEffect magnusEffect = null;
 
+    [SerializeField] MovingBall ballScript = null;
+
     private Vector3 magnusForce = Vector3.zero;
+
+    //Arrows GUI
+    private bool arrowsVisible = true;
+    private bool setInitialVelocityArrow = false;
 
     // Start is called before the first frame update
     void Start()
@@ -59,18 +67,20 @@ public class Controller : MonoBehaviour
             ForceSliderLogic();
         }
         MagnusSliderLogic();
+        if(doOnceKeyPressed && ballScript.updateArrows)
+        {
+            UpdateArrows();
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        magnusForce = magnusEffect.MagnusForce(ballVelocity);
+        //magnusForce = magnusEffect.MagnusForce(ballVelocity);
+        magnusForce = magnusEffect.MagnusForceWithVelocity(ballVelocity, 0.0017f) * effectSlider.value;
         SolverEuler(ballAcceleration + gravity + magnusForce);
     }
 
-    private void CalculateRedBallPos()
-    {
-        //difHorizontalPos = 
-    }
     private void UpdateKeys()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -83,7 +93,25 @@ public class Controller : MonoBehaviour
             isKeyPressed = false;
             doOnceKeyPressed = true;
             scorpionScript.StartWalk();
+            
         }
+
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            if(arrowsVisible)
+            {
+                ballScript.SetArrowVisible(false);
+                ballScript.SetStateLine();
+                arrowsVisible = false;
+            }
+            else
+            {
+                ballScript.SetArrowVisible(true);
+                ballScript.SetStateLine();
+                arrowsVisible = true;
+            }
+        }
+
     }
 
     private void ForceSliderLogic()
@@ -112,11 +140,11 @@ public class Controller : MonoBehaviour
     {
         if (effectSlider.value < effectSlider.maxValue && Input.GetKey(KeyCode.X))
         {
-            effectSlider.value += velocityStrenghtBar;
+            effectSlider.value += velocityEffectBar;
         }  
         else if (forceSlider.value >= 0 && Input.GetKey(KeyCode.Z))
         {
-            effectSlider.value -= velocityStrenghtBar;
+            effectSlider.value -= velocityEffectBar;
         }
     }
     public void SetStartForce()
@@ -131,13 +159,25 @@ public class Controller : MonoBehaviour
 
     public void ResetForce()
     {
-        ballAcceleration = Vector3.zero;
+        //ballAcceleration = Vector3.zero;
     }
 
     private void SolverEuler(Vector3 _force)
     {
         ball.transform.position = ball.transform.position + ballVelocity * Time.deltaTime;
         ballVelocity = ballVelocity + _force * Time.deltaTime;
+    }
+
+    private void UpdateArrows()
+    {
+        ballScript.velocityArrowDirection = ballVelocity.normalized;
+        if(!setInitialVelocityArrow && ballVelocity.normalized != Vector3.zero)
+        {
+            ballScript.initialVelocityArrowDirection = ballVelocity.normalized;
+            setInitialVelocityArrow = true;
+        }
+        
+        ballScript.forceArrowDirection = Vector3.Normalize(ballAcceleration + gravity + magnusForce);
     }
 
     public void Reset()
@@ -156,5 +196,10 @@ public class Controller : MonoBehaviour
         isStrenghtGoingUp = true;
         doOnceKeyPressed = false;
         forceSlider.value = 0;
+
+        setInitialVelocityArrow = false;
+        ballScript.ResetArrows();
+
+        magnusEffect.doOnce = false;
     }
 }
